@@ -7,8 +7,11 @@ from sqlalchemy.orm import relationship
 import models
 from models.review import Review
 from models.amenity import Amenity
+from os import getenv
 
-if models.storage_t == 'db':
+
+storage_type = getenv("HBNB_TYPE_STORAGE")
+if storage_type == 'db':
     place_amenity = Table('place_amenity', Base.metadata,
                           Column('place_id', String(60),
                                  ForeignKey('places.id', onupdate='CASCADE',
@@ -22,7 +25,7 @@ if models.storage_t == 'db':
 
 class Place(BaseModel, Base):
     """ A place to stay """
-    if models.storage_type == "db":
+    if storage_type == "db":
         __tablename__ = 'places'
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -51,7 +54,7 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
-if models.storage_t != 'db':
+if storage_type != 'db':
         @property
         def reviews(self):
             """Get a list of all reviews"""
