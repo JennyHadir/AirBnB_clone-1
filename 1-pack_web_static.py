@@ -11,7 +11,7 @@ def do_pack():
     try:
         date = datetime.now().strftime("%Y%m%d%H%M%S")
         file = "version/web_static_{}.tgz".format(date)
-        if os.path.isdir("versions") is false:
+        if os.path.isdir("versions") is False:
             local("mkdir versions")
         local("tar -cvzf {} web_static_".format(file))
         return file
