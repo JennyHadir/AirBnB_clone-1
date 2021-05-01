@@ -39,8 +39,7 @@ def numb(n):
 @app.route('/number_template/<int:n>', strict_slashes=False)
 def numb_template(n):
     """ Return a HTML page if n is a number"""
-    if isinstance(n, int):
-        return render_template('5-number.html', n=n)
+    return render_template('5-number.html', n=n)
 
 if __name__ == "__main__":
     app.debug = True
