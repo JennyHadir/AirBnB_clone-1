@@ -12,14 +12,11 @@ import models
 class State(BaseModel, Base):
     """ State class """
     storage_type = getenv("HBNB_TYPE_STORAGE")
-    if storage_type == 'db':
-        __tablename__ = 'states'
-        name = Column(String(128), nullable=False)
-        cities = relationship("City", backref="state")
-    else:
-        name = ""
+    __tablename__ = 'states'
+    name = Column(String(128), nullable=False)
+    cities = relationship("City", backref="state")
 
-    if storage_type == 'db':
+    if storage_type != 'db':
         @property
         def cities(self):
             """Get a list of related city"""
